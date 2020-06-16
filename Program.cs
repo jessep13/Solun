@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Console = Colorful.Console;
+using System;
+using System.Drawing;
 
 namespace Solun
 {
@@ -6,7 +8,8 @@ namespace Solun
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			Console.WriteAscii("Solun", Color.Yellow);
+			Console.ReadLine();
 		}
 	}
 }
