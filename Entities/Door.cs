@@ -19,8 +19,8 @@ namespace Solun.Entities
 
 		public Door(Room startRoom, Room endRoom)
 		{
-			name = $"{endRoom} Door";
-			description = $"A door leading to {endRoom}.";
+			name = $"{endRoom.Name} Door";
+			description = $"A door leading to {endRoom.Name}.";
 
 			this.startRoom = startRoom;
 			this.endRoom = endRoom;

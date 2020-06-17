@@ -7,7 +7,7 @@ namespace Solun.World
 {
 	class Sector
 	{
-		List<Room> rooms;
+		List<Room> rooms = new List<Room>();
 
 		public List<Room> Rooms => rooms;
 

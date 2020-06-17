@@ -1,4 +1,7 @@
-﻿using Console = Colorful.Console;
+﻿#define LISTCOM
+#undef LISTCOM
+
+using Console = Colorful.Console;
 using Solun.Entities;
 using Solun.Entities.Items;
 using Solun.Entities.Mobs;
@@ -49,10 +52,10 @@ namespace Solun
 			for(int i = 0; i < args.Length; i++)
 			{
 				// Turn '_' into ' '
-				args[i].Replace('_', ' ');
+				args[i] = args[i].Replace('_', ' ');
 
-				// Print each argument if DEBUG
 #if DEBUG
+				// Print each argument				
 				Console.WriteLine($"[{i}]: |{args[i]}|", Color.HotPink);
 #endif
 			}
@@ -60,7 +63,7 @@ namespace Solun
 			// Find which command to use
 			foreach(Command com in Commands)
 			{
-#if DEBUG
+#if DEBUG && LISTCOM
 				Console.WriteLine($"COMMAND: {com.Method.Name}", Color.HotPink);
 #endif
 				if(com.Method.Name.ToLower() == args[0].ToLower())
@@ -102,9 +105,25 @@ namespace Solun
 					Console.WriteLine("help (command): Gives info on commands");
 					Console.WriteLine("\t(command): The command to be detailed. if left blank, all commands will be listed");
 					break;
+				case "look":
+					Console.WriteLine("look (entity) (\"-l\"): Gives description of room or entity");
+					Console.WriteLine("\t(entity): The target entity to look at");
+					Console.WriteLine("\t(\"-l\") list all entities");
+					break;
+				case "move":
+					Console.WriteLine("move (room): Move to an adjacent room");
+					Console.WriteLine("\t(room): The room to move to");
+					break;
+				case "use":
+					Console.WriteLine("use (entity): Use the specified entity");
+					Console.WriteLine("\t(entity): The target entity to use");
+					break;
 				default:
 					Console.WriteLine("exit: Exits the application");
 					Console.WriteLine("help: Gives info on commands");
+					Console.WriteLine("look: Gives description of room or entity");
+					Console.WriteLine("move: Move to an adjacent room");
+					Console.WriteLine("use:  Use the specified entity");
 					break;
 			}
 		}
