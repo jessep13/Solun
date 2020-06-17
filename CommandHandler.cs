@@ -41,14 +41,18 @@ namespace Solun
 			parameters.Add(command);
 
 			string[] args = parameters.ToArray();
-
-#if DEBUG
-			// Print each argument
+			
 			for(int i = 0; i < args.Length; i++)
 			{
+				// Turn '_' into ' '
+				args[i].Replace('_', ' ');
+
+				// Print each argument if DEBUG
+#if DEBUG
 				Console.WriteLine($"[{i}]: |{args[i]}|", Color.HotPink);
-			}
 #endif
+			}
+
 			// Find which command to use
 			foreach(Command com in Commands)
 			{

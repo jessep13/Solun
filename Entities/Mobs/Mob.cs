@@ -1,4 +1,5 @@
 ﻿using Solun.Entities.Items;
+using Solun.World;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,15 +22,22 @@ namespace Solun.Entities.Mobs
 
 		// TODO: Implement armor and weapons
 
+		protected Room currentRoom;
+
+		public Room CurrentRoom => currentRoom;
+
 		public Mob() { }
 		
-		public Mob(string name, string description, int maxHealth)
+		public Mob(string name, string description, int maxHealth, Room currentRoom)
 		{
 			this.name = name;
 			this.description = description;
 
 			this.maxHealth = maxHealth;
 			health = maxHealth;
+
+			this.currentRoom = currentRoom;
+			currentRoom.Entities.Add(this);
 		}
 
 		public int TotalWeight()
@@ -44,6 +52,16 @@ namespace Solun.Entities.Mobs
 		public void AddItem(Item item)
 		{
 			if(CanTakeItem(item)) inventory.Add(item);
+		}
+
+		public void MoveToRoom(Room room, Entity entity)
+		{
+			if(entity is Door)
+			{
+				currentRoom.Entities.Remove(this);
+				currentRoom = room;
+				currentRoom.Entities.Add(this);
+			}
 		}
 	}
 }

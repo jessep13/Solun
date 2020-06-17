@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Solun.World;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,13 +7,16 @@ namespace Solun.Entities.Mobs
 {
 	class Player : Mob
 	{
-		public Player()
+		public Player(Room currentRoom)
 		{
 			name = "me";
 			description = "You look like... you.";
 
 			maxHealth = 100;
 			health = maxHealth;
+
+			this.currentRoom = currentRoom;
+			currentRoom.Entities.Add(this);
 		}
 
 		public override void Interact(Entity entity)

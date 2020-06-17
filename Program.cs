@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Solun.Entities.Mobs;
+using Solun.World;
 
 namespace Solun
 {
@@ -12,7 +13,11 @@ namespace Solun
 		{	
 			Console.WriteAscii("Solun", Color.Yellow);
 
-			Player player = new Player();
+			Room testRoom = new Room(
+				"testRoom",
+				"The room is colored red");
+
+			Player player = new Player(testRoom);
 
 			CommandHandler comHan = new CommandHandler(player);
 
