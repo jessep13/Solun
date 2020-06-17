@@ -1,6 +1,7 @@
 ﻿using Solun.Entities;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace Solun.World
@@ -20,12 +21,8 @@ namespace Solun.World
 			}
 		}
 
-		public void LinkRooms(string name1, string name2)
-		{
-			Room room1 = rooms.Find(rm => rm.Name.ToLower() == name1.ToLower());
-			Room room2 = rooms.Find(rm => rm.Name.ToLower() == name2.ToLower());
+		public void LinkRooms(string name1, string name2) => LinkRooms(GetRoom(name1), GetRoom(name2));
 
-			LinkRooms(room1, room2);
-		}
+		public Room GetRoom(string name) => rooms.Find(rm => rm.Name.ToLower() == name.ToLower());
 	}
 }

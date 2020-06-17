@@ -9,7 +9,9 @@ namespace Solun.Entities.Items
 		protected int weight;
 
 		public int Weight => weight;
-		
+
+		public Item() { }
+
 		public Item(string name, string description, int weight)
 		{
 			this.name = name;

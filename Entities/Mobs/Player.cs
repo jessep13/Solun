@@ -15,6 +15,8 @@ namespace Solun.Entities.Mobs
 			maxHealth = 100;
 			health = maxHealth;
 
+			maxWeight = 100;
+
 			this.currentRoom = currentRoom;
 			currentRoom.Entities.Add(this);
 		}

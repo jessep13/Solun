@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Solun.Entities.Mobs;
 using Solun.World;
+using Solun.Entities.Items;
 
 namespace Solun
 {
@@ -30,20 +31,23 @@ namespace Solun
 		}
 
 		static void CreateSector()
-		{
-			Room tempRoom;
-			
+		{			
 			sector.Rooms.Add(new Room("A", "The entire room is red"));
 			sector.Rooms.Add(new Room("B", "The entire room is green"));
 			sector.Rooms.Add(new Room("C", "The entire room is blue"));
 
 			sector.LinkRooms("A", "B");
 			sector.LinkRooms("C", "B");
+
+			sector.GetRoom("C").Entities.Add(new Note(
+				"Paper note",
+				"A piece of paper with two large words written on it.",
+				"Hello, World"));
 		}
 
 		static void SpawnPlayer(string roomName)
 		{
-			Room spawnRoom = sector.Rooms.Find(room => room.Name.ToLower() == "A".ToLower());
+			Room spawnRoom = sector.GetRoom(roomName);
 			if(!sector.Rooms.Contains(spawnRoom)) throw new Exception("Spawn room not found");
 			else player = new Player(spawnRoom);
 		}
