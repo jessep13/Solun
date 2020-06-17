@@ -9,6 +9,9 @@ namespace Solun.Entities
 		protected string name;
 		protected string description;
 
+		public string Name => name;
+		public string Description => description;
+
 		public Entity() { }
 
 		public Entity(string name, string description)

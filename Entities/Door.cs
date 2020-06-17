@@ -11,6 +11,12 @@ namespace Solun.Entities
 		Room startRoom;
 		Room endRoom;
 
+		static Converter<Entity, Door> entityToDoor = new Converter<Entity, Door>(entity => (Door)entity);
+		public static Converter<Entity, Door> EntityToDoor => entityToDoor;
+
+		public Room StartRoom => startRoom;
+		public Room EndRoom => endRoom;
+
 		public Door(Room startRoom, Room endRoom)
 		{
 			name = $"{endRoom} Door";

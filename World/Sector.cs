@@ -22,8 +22,8 @@ namespace Solun.World
 
 		public void LinkRooms(string name1, string name2)
 		{
-			Room room1 = rooms.Find(rm => rm.Name == name1);
-			Room room2 = rooms.Find(rm => rm.Name == name2);
+			Room room1 = rooms.Find(rm => rm.Name.ToLower() == name1.ToLower());
+			Room room2 = rooms.Find(rm => rm.Name.ToLower() == name2.ToLower());
 
 			LinkRooms(room1, room2);
 		}
