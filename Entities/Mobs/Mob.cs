@@ -54,12 +54,13 @@ namespace Solun.Entities.Mobs
 			if(CanTakeItem(item)) inventory.Add(item);
 		}
 
-		public void MoveToRoom(Room room, Entity entity)
+		public void MoveToRoom(Entity entity)
 		{
 			if(entity is Door)
 			{
 				currentRoom.Entities.Remove(this);
-				currentRoom = room;
+				Door door = (Door)entity;
+				currentRoom = door.EndRoom;
 				currentRoom.Entities.Add(this);
 			}
 		}
