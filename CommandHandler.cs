@@ -1,4 +1,7 @@
 ﻿using Console = Colorful.Console;
+using Solun.Entities;
+using Solun.Entities.Items;
+using Solun.Entities.Mobs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,10 +13,14 @@ namespace Solun
 	{
 		delegate void Command(string[] args);
 
+		Player player;
+
 		static List<Command> Commands = new List<Command>();
 
-		public CommandHandler()
+		public CommandHandler(Player player)
 		{
+			this.player = player;
+			
 			// List them all here
 			Commands.Add(Help);
 			Commands.Add(Exit);

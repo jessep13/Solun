@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using Solun.Entities.Mobs;
 
 namespace Solun
 {
@@ -11,7 +12,9 @@ namespace Solun
 		{	
 			Console.WriteAscii("Solun", Color.Yellow);
 
-			CommandHandler comHan = new CommandHandler();
+			Player player = new Player();
+
+			CommandHandler comHan = new CommandHandler(player);
 
 			while(true)
 			{
