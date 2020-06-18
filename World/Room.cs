@@ -22,5 +22,7 @@ namespace Solun.World
 			this.name = name;
 			this.description = description;
 		}
+
+		public Entity FindEntity(string name) => entities.Find(entity => entity.Name.ToLower() == name.ToLower());
 	}
 }

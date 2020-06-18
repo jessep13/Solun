@@ -31,6 +31,7 @@ namespace Solun
 			Commands.Add(Look);
 			Commands.Add(Use);
 			Commands.Add(Move);
+			Commands.Add(Take);
 		}
 
 		public void HandleInput(string input)
@@ -118,11 +119,16 @@ namespace Solun
 					Console.WriteLine("use (entity): Use the specified entity");
 					Console.WriteLine("\t(entity): The target entity to use");
 					break;
+				case "take":
+					Console.WriteLine("take (item): Take an item into your inventory");
+					Console.WriteLine("\t(item): The target item to take");
+					break;
 				default:
 					Console.WriteLine("exit: Exits the application");
 					Console.WriteLine("help: Gives info on commands");
 					Console.WriteLine("look: Gives description of room or entity");
 					Console.WriteLine("move: Move to an adjacent room");
+					Console.WriteLine("take: Take an item into your inventory");
 					Console.WriteLine("use:  Use the specified entity");
 					break;
 			}
@@ -189,7 +195,7 @@ namespace Solun
 					// Check in room
 					if(player.CurrentRoom.Entities.Count != 0)
 					{
-						Entity entity = player.CurrentRoom.Entities.Find(entity => entity.Name.ToLower() == name.ToLower());
+						Entity entity = player.CurrentRoom.FindEntity(name);
 						if(player.CurrentRoom.Entities.Contains(entity))
 						{
 							Console.WriteLine(entity.Description);
@@ -224,7 +230,7 @@ namespace Solun
 			// Check in room
 			if(player.CurrentRoom.Entities.Count != 0)
 			{
-				Entity entity = player.CurrentRoom.Entities.Find(entity => entity.Name.ToLower() == name.ToLower());
+				Entity entity = player.CurrentRoom.FindEntity(name);
 				if(player.CurrentRoom.Entities.Contains(entity))
 				{
 					entity.Interact(player);
@@ -271,6 +277,34 @@ namespace Solun
 			{
 				Console.WriteLine($"You couldn't move into \"{roomName}\" room");
 			}
+		}
+
+		private void Take(string[] args)
+		{
+			string name;
+			if(args.Length == 1)
+			{
+				Console.WriteLine("What do you want to take?\n\t> ");
+				name = Console.ReadLine();
+			}
+			else name = args[1];
+
+			// Check in room
+			if(player.CurrentRoom.Entities.Count != 0)
+			{
+				Entity entity = player.CurrentRoom.FindEntity(name);
+				if(player.CurrentRoom.Entities.Contains(entity))
+				{
+					if(entity is Item && player.CanTakeItem((Item)entity))
+					{
+						player.AddItem((Item)entity);
+						Console.WriteLine($"You took the {entity.Name}");
+					}
+					else Console.WriteLine($"You cannot take {entity.Name}");
+				}
+			}
+
+			Console.WriteLine($"Entity \"{name}\" not found. See all entities in room with look -l");
 		}
 
 		#endregion
