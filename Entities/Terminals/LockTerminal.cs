@@ -7,9 +7,9 @@ namespace Solun.Entities.Terminals
 	class LockTerminal : Terminal
 	{
 		int code;
-		Lock lockEntity;
+		public Lock lockEntity; // TODO: Reconfigure
 		
-		public LockTerminal(int id, Lock lockEntity, int code)
+		public LockTerminal(int id, int code, Lock lockEntity = null)
 		{
 			name = $"T#{id}";
 			description = $"A standard terminal with the numbers {id} etched on the side. The monitor awaits an input";
@@ -17,14 +17,14 @@ namespace Solun.Entities.Terminals
 			this.id = id;
 			if(id > 9999 || id < 0) throw new Exception("Int is invalid");
 
-			this.lockEntity = lockEntity;
+			if(lockEntity != null) this.lockEntity = lockEntity;
 			this.code = code; // Must be 4 digits long
 			if(code > 9999 || code < 0) throw new Exception("Int is invalid");
 		}
 
 		protected override void Execute()
 		{
-			Console.WriteLine("Enter 4-digit Code: ");
+			Console.Write("Enter 4-digit Code: ");
 
 			int passCode;
 
@@ -38,7 +38,7 @@ namespace Solun.Entities.Terminals
 				}
 				catch
 				{
-					Console.WriteLine("Input was not a digit code.");
+					Console.Write("Invalid Input. Enter again: ");
 				}
 			}
 

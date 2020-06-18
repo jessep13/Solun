@@ -12,17 +12,34 @@ namespace Solun.World
 
 		public List<Room> Rooms => rooms;
 
-		public void LinkRooms(Room room1, Room room2)
+		public void AddRoom(string name, string description) => rooms.Add(new Room(
+			name,
+			description,
+			this));
+
+		public void LinkRooms(Room room1, Room room2, Entity unlockEntity = null, bool isLocked = false)
 		{
 			if(rooms.Contains(room1) && rooms.Contains(room2))
 			{
-				room1.Entities.Add(new Door(room1, room2));
-				room2.Entities.Add(new Door(room2, room1));
+				Lock doorLock = null;
+				
+				if(unlockEntity != null)
+				{
+					doorLock = new Lock(
+						$"{room1}|{room2} lock",
+						$"A lock for the door connecting {room1} and {room2}",
+						unlockEntity,
+						isLocked);
+				}
+
+				room1.Entities.Add(new Door(room1, room2, doorLock));
+				room2.Entities.Add(new Door(room2, room1, doorLock));
 			}
 		}
 
-		public void LinkRooms(string name1, string name2) => LinkRooms(GetRoom(name1), GetRoom(name2));
+		public void LinkRooms(string name1, string name2, Entity unlockEntity = null, bool isLocked = false) 
+			=> LinkRooms(FindRoom(name1), FindRoom(name2), unlockEntity, isLocked);
 
-		public Room GetRoom(string name) => rooms.Find(rm => rm.Name.ToLower() == name.ToLower());
+		public Room FindRoom(string name) => rooms.Find(rm => rm.Name.ToLower() == name.ToLower());
 	}
 }

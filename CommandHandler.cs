@@ -255,8 +255,8 @@ namespace Solun
 			Room currentRoom = player.CurrentRoom;
 
 			// Find and use correct door
-			List<Door> doors = currentRoom.Entities.FindAll(door => door is Door).ConvertAll(Door.EntityToDoor);
-			Door enterDoor = doors.Find(door => door.EndRoom.Name.ToLower() == roomName.ToLower());
+			List<Door> doors = currentRoom.FindAll<Door>();
+			Door enterDoor = currentRoom.FindDoorTo(roomName); 
 
 			if(doors.Contains(enterDoor)) enterDoor.Interact(player);
 

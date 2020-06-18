@@ -21,5 +21,7 @@ namespace Solun.Entities
 		}
 
 		public abstract void Interact(Entity entity);
+		
+		public override string ToString() => name; // Only if entity is not implied
 	}
 }

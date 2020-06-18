@@ -13,9 +13,6 @@ namespace Solun.Entities
 
 		Lock doorLock;
 
-		static Converter<Entity, Door> entityToDoor = new Converter<Entity, Door>(entity => (Door)entity);
-		public static Converter<Entity, Door> EntityToDoor => entityToDoor;
-
 		public Room StartRoom => startRoom;
 		public Room EndRoom => endRoom;
 
