@@ -6,6 +6,7 @@ using Solun.Entities.Mobs;
 using Solun.World;
 using Solun.Entities.Items;
 using Solun.Entities.Terminals;
+using System.Linq;
 
 namespace Solun
 {
@@ -33,12 +34,19 @@ namespace Solun
 
 		static void CreateSector()
 		{
+			//string[] names;
+
 			// Create Cell and Main Lab rooms
 			sector.AddRoom(
 				"Cell",
 				"The room is surrounded in a white metal material with a terminal next to the door to the main lab.");
 			sector.AddRoom(
-				"Main Lab",
+				new string[]
+				{
+					"Main Lab",
+					"Main",
+					"Lab"
+				},
 				"The walls are the same as the last room. Another door is next to a terminal.");
 
 			// Create Lock Terminal in Cell
@@ -62,6 +70,30 @@ namespace Solun
 				"Cell Note",
 				"The note appears to be typed, with a signature on the bottem.",
 				"Hello. If you are reading this, it appears that you have learned to use your brain to pick up this note and to read it. I will explain later where you are, but for now you shouldn't be too concerned about that since you will be out of here in less than an hour. To open the door in front of you, there is a Lock Terminal awaiting for a code to open the door. You must enter \"1492\" into it in order to be granted access. The next challenge will lie in the next room. \nGood Luck. \n\t - F. E."));
+
+			// Add bio lab
+			sector.AddRoom(
+				new string[] 
+				{
+					"Bio Lab",
+					"Bio",
+					"Lab"
+				},
+				"Plants are scatters all over the place. The room seems to suit their enviorment very well.");
+			sector.LinkRooms("Bio", "Main");
+
+			// Add chem lab
+			sector.AddRoom(
+				new string[]
+				{
+					"Chemical Lab",
+					"Chem Lab",
+					"Chemical",
+					"Chem",
+					"Lab"
+				},
+				"The room is suprisingly devoid of any visable chemicals. Perhaps they are in the cabinets for safety concerns.");
+			sector.LinkRooms("Chem", "Main");
 		}
 
 		static void SpawnPlayer(string roomName)

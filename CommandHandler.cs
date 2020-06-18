@@ -243,6 +243,10 @@ namespace Solun
 
 		private void Move(string[] args)
 		{
+			Room currentRoom = player.CurrentRoom;
+			List<Door> doors = currentRoom.FindAll<Door>();
+			Door enterDoor;
+
 			// Get room name
 			string roomName;
 			if(args.Length == 1)
@@ -252,21 +256,22 @@ namespace Solun
 			}
 			else roomName = args[1];
 
-			Room currentRoom = player.CurrentRoom;
-
-			// Find and use correct door
-			List<Door> doors = currentRoom.FindAll<Door>();
-			Door enterDoor = currentRoom.FindDoorTo(roomName); 
+			// Try to find and use correct door
+			while(true)
+			{
+				try
+				{
+					enterDoor = currentRoom.FindDoorTo(roomName);
+					break;
+				}
+				catch
+				{
+					Console.Write("Enter a more specific name of the room.\n\t> ");
+					roomName = Console.ReadLine();
+				}
+			}
 
 			if(doors.Contains(enterDoor)) enterDoor.Interact(player);
-
-			// Use as backup
-			//Door door = (Door)currentRoom.Entities.Find(
-			//	dr => dr is Door && dr.Name.ToLower() == $"{roomName} Door".ToLower());
-			//if(currentRoom.Entities.Contains(door))
-			//{
-			//	door.Interact(player);
-			//}
 
 			// Check if player moved
 			if(currentRoom != player.CurrentRoom)

@@ -1,6 +1,7 @@
 ﻿using Solun.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
@@ -14,6 +15,16 @@ namespace Solun.World
 
 		public void AddRoom(string name, string description) => rooms.Add(new Room(
 			name,
+			description,
+			this));
+
+		public void AddRoom(List<string> names, string description) => rooms.Add(new Room(
+			names,
+			description,
+			this));
+
+		public void AddRoom(string[] names, string description) => rooms.Add(new Room(
+			names,
 			description,
 			this));
 
@@ -40,6 +51,18 @@ namespace Solun.World
 		public void LinkRooms(string name1, string name2, Entity unlockEntity = null, bool isLocked = false) 
 			=> LinkRooms(FindRoom(name1), FindRoom(name2), unlockEntity, isLocked);
 
-		public Room FindRoom(string name) => rooms.Find(rm => rm.Name.ToLower() == name.ToLower());
+		public Room FindRoom(string name) //=> rooms.Find(rm => rm.IsNamed(name));
+		{
+			List<Room> validRooms = rooms.FindAll(room => room.IsNamed(name));
+			switch(validRooms.Count)
+			{
+				case 0:
+					return null;
+				case 1:
+					return validRooms.First();
+				default:
+					throw new Exception("Multiple Objects Found");
+			}
+		} 
 	}
 }
