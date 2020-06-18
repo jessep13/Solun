@@ -34,19 +34,17 @@ namespace Solun
 
 		static void CreateSector()
 		{
-			//string[] names;
-
 			// Create Cell and Main Lab rooms
 			sector.AddRoom(
-				"Cell",
+				new NameHolder("Cell"),
 				"The room is surrounded in a white metal material with a terminal next to the door to the main lab.");
 			sector.AddRoom(
-				new string[]
+				new NameHolder(new string[]
 				{
 					"Main Lab",
 					"Main",
 					"Lab"
-				},
+				}),
 				"The walls are the same as the last room. Another door is next to a terminal.");
 
 			// Create Lock Terminal in Cell
@@ -73,25 +71,25 @@ namespace Solun
 
 			// Add bio lab
 			sector.AddRoom(
-				new string[] 
+				new NameHolder(new string[] 
 				{
 					"Bio Lab",
 					"Bio",
 					"Lab"
-				},
+				}),
 				"Plants are scatters all over the place. The room seems to suit their enviorment very well.");
 			sector.LinkRooms("Bio", "Main");
 
 			// Add chem lab
 			sector.AddRoom(
-				new string[]
+				new NameHolder(new string[]
 				{
 					"Chemical Lab",
 					"Chem Lab",
 					"Chemical",
 					"Chem",
 					"Lab"
-				},
+				}),
 				"The room is suprisingly devoid of any visable chemicals. Perhaps they are in the cabinets for safety concerns.");
 			sector.LinkRooms("Chem", "Main");
 		}

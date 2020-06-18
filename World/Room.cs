@@ -9,12 +9,12 @@ namespace Solun.World
 {
 	class Room
 	{
-		List<string> names = new List<string>();
-		//string name;
+		NameHolder allNames = new NameHolder();
+
 		string description;
 
-		public List<string> Names => names;
-		public string Name => Names.First();
+		public NameHolder AllNames => allNames;
+		public string Name => allNames.Name;
 		public string Description => description;
 
 		List<Entity> entities = new List<Entity>();
@@ -23,31 +23,15 @@ namespace Solun.World
 
 		public List<Entity> Entities => entities;
 
-		public Room(string name, string description, Sector sector)
+		public Room(NameHolder names, string description, Sector sector)
 		{
-			names.Add(name);
+			this.allNames = names;
 			this.description = description;
 
 			this.sector = sector;
 		}
 
-		public Room(List<string> names, string description, Sector sector)
-		{
-			this.names = names;
-			this.description = description;
-
-			this.sector = sector;
-		}
-
-		public Room(string[] names, string description, Sector sector)
-		{
-			this.names = names.ToList();
-			this.description = description;
-
-			this.sector = sector;
-		}
-
-		public bool IsNamed(string name) => names.Contains(names.Find(nm => nm.ToLower() == name.ToLower()));
+		public bool IsNamed(string name) => allNames.IsNamed(name);
 
 		public void AddEntity(Entity entity) => entities.Add(entity);
 

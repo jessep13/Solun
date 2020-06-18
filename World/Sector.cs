@@ -13,17 +13,7 @@ namespace Solun.World
 
 		public List<Room> Rooms => rooms;
 
-		public void AddRoom(string name, string description) => rooms.Add(new Room(
-			name,
-			description,
-			this));
-
-		public void AddRoom(List<string> names, string description) => rooms.Add(new Room(
-			names,
-			description,
-			this));
-
-		public void AddRoom(string[] names, string description) => rooms.Add(new Room(
+		public void AddRoom(NameHolder names, string description) => rooms.Add(new Room(
 			names,
 			description,
 			this));
