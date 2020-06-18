@@ -56,6 +56,12 @@ namespace Solun
 			// Set lock for Lock Terminal
 			sector.FindRoom("Cell").FindEntityType<LockTerminal>("T#1001").lockEntity
 				= sector.FindRoom("Cell").FindDoorTo("Main Lab").DoorLock;
+
+			// Add note in Cell
+			sector.FindRoom("Cell").AddEntity(new Note(
+				"Cell Note",
+				"The note appears to be typed, with a signature on the bottem.",
+				"Hello. If you are reading this, it appears that you have learned to use your brain to pick up this note and to read it. I will explain later where you are, but for now you shouldn't be too concerned about that since you will be out of here in less than an hour. To open the door in front of you, there is a Lock Terminal awaiting for a code to open the door. You must enter \"1492\" into it in order to be granted access. The next challenge will lie in the next room. \nGood Luck. \n\t - F. E."));
 		}
 
 		static void SpawnPlayer(string roomName)

@@ -298,7 +298,10 @@ namespace Solun
 					if(entity is Item && player.CanTakeItem((Item)entity))
 					{
 						player.AddItem((Item)entity);
+						player.CurrentRoom.Entities.Remove(entity);
 						Console.WriteLine($"You took the {entity.Name}");
+
+						return;
 					}
 					else Console.WriteLine($"You cannot take {entity.Name}");
 				}
