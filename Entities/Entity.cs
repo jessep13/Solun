@@ -6,22 +6,26 @@ namespace Solun.Entities
 {
 	abstract class Entity
 	{
-		protected string name;
+		protected NameHolder allNames = new NameHolder();
+
 		protected string description;
 
-		public string Name => name;
+		public NameHolder AllNames => allNames;
+		public string Name => allNames.Name;
 		public string Description => description;
 
 		public Entity() { }
 
-		public Entity(string name, string description)
+		public Entity(NameHolder names, string description)
 		{
-			this.name = name;
+			allNames = names;
 			this.description = description;
 		}
 
 		public abstract void Interact(Entity entity);
 		
-		public override string ToString() => name; // Only if entity is not implied
+		public override string ToString() => Name; // Only if entity is not implied
+
+		public bool IsNamed(string name) => allNames.IsNamed(name);
 	}
 }

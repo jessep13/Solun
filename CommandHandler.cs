@@ -184,7 +184,7 @@ namespace Solun
 					// Check inventory
 					if(player.Inventory.Count != 0)
 					{
-						Item item = player.Inventory.Find(item => item.Name.ToLower() == name.ToLower());
+						Item item = player.Inventory.Find(item => item.IsNamed(name));
 						if(player.Inventory.Contains(item))
 						{
 							Console.WriteLine(item.Description);
@@ -219,7 +219,7 @@ namespace Solun
 			// Check inventory
 			if(player.Inventory.Count != 0)
 			{
-				Item item = player.Inventory.Find(item => item.Name.ToLower() == name.ToLower());
+				Item item = player.Inventory.Find(item => item.IsNamed(name));
 				if(player.Inventory.Contains(item))
 				{
 					item.Interact(player);

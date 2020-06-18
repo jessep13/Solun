@@ -12,9 +12,9 @@ namespace Solun.Entities.Items
 
 		public Item() { }
 
-		public Item(string name, string description, int weight)
+		public Item(NameHolder names, string description, int weight)
 		{
-			this.name = name;
+			allNames = names;
 			this.description = description;
 
 			this.weight = weight;

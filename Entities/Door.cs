@@ -20,7 +20,12 @@ namespace Solun.Entities
 
 		public Door(Room startRoom, Room endRoom, Lock doorLock = null)
 		{
-			name = $"{endRoom.Name} Door";
+			allNames = new NameHolder( new string[]
+			{
+				$"{endRoom.Name} Door",
+				$"{endRoom.Name}",
+				"Door"
+			});
 			description = $"A door leading to {endRoom.Name}.";
 
 			this.startRoom = startRoom;

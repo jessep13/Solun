@@ -27,8 +27,8 @@ namespace Solun.World
 				if(unlockEntity != null)
 				{
 					doorLock = new Lock(
-						$"{room1}|{room2} lock",
-						$"A lock for the door connecting {room1} and {room2}",
+						new NameHolder($"{room1.Name}|{room2.Name} lock"),
+						$"A lock for the door connecting {room1.Name} and {room2.Name}",
 						unlockEntity,
 						isLocked);
 				}
@@ -41,18 +41,6 @@ namespace Solun.World
 		public void LinkRooms(string name1, string name2, Entity unlockEntity = null, bool isLocked = false) 
 			=> LinkRooms(FindRoom(name1), FindRoom(name2), unlockEntity, isLocked);
 
-		public Room FindRoom(string name) //=> rooms.Find(rm => rm.IsNamed(name));
-		{
-			List<Room> validRooms = rooms.FindAll(room => room.IsNamed(name));
-			switch(validRooms.Count)
-			{
-				case 0:
-					return null;
-				case 1:
-					return validRooms.First();
-				default:
-					throw new Exception("Multiple Objects Found");
-			}
-		} 
+		public Room FindRoom(string name) => Program.CheckMulti<Room>(rooms.FindAll(room => room.IsNamed(name)));
 	}
 }

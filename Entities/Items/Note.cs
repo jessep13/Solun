@@ -10,9 +10,9 @@ namespace Solun.Entities.Items
 	{
 		string message;
 
-		public Note(string name, string description, string message)
+		public Note(NameHolder names, string description, string message)
 		{
-			this.name = name;
+			allNames = names;
 			this.description = description;
 			
 			weight = 0;

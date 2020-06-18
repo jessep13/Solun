@@ -28,9 +28,9 @@ namespace Solun.Entities.Mobs
 
 		public Mob() { }
 		
-		public Mob(string name, string description, int maxHealth, Room currentRoom)
+		public Mob(NameHolder names, string description, int maxHealth, Room currentRoom)
 		{
-			this.name = name;
+			allNames = names;
 			this.description = description;
 
 			this.maxHealth = maxHealth;

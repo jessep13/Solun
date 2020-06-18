@@ -32,6 +32,19 @@ namespace Solun
 			}
 		}
 
+		public static Type CheckMulti<Type>(List<Type> typeList)
+		{
+			switch(typeList.Count)
+			{
+				case 0:
+					return default(Type);
+				case 1:
+					return typeList.First();
+				default:
+					throw new Exception("Multiple Objects Found");
+			}
+		}
+
 		static void CreateSector()
 		{
 			// Create Cell and Main Lab rooms
@@ -65,7 +78,12 @@ namespace Solun
 
 			// Add note in Cell
 			sector.FindRoom("Cell").AddEntity(new Note(
-				"Cell Note",
+				new NameHolder(new string[]
+				{
+					"Cell Note",
+					"Cell",
+					"Note"
+				}),
 				"The note appears to be typed, with a signature on the bottem.",
 				"Hello. If you are reading this, it appears that you have learned to use your brain to pick up this note and to read it. I will explain later where you are, but for now you shouldn't be too concerned about that since you will be out of here in less than an hour. To open the door in front of you, there is a Lock Terminal awaiting for a code to open the door. You must enter \"1492\" into it in order to be granted access. The next challenge will lie in the next room. \nGood Luck. \n\t - F. E."));
 

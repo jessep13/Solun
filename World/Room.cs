@@ -25,7 +25,7 @@ namespace Solun.World
 
 		public Room(NameHolder names, string description, Sector sector)
 		{
-			this.allNames = names;
+			allNames = names;
 			this.description = description;
 
 			this.sector = sector;
@@ -35,7 +35,9 @@ namespace Solun.World
 
 		public void AddEntity(Entity entity) => entities.Add(entity);
 
-		public Entity FindEntity(string name) => entities.Find(entity => entity.Name.ToLower() == name.ToLower());
+		public Entity FindEntity(string name) 
+			=> Program.CheckMulti<Entity>(entities.FindAll(entity => entity.IsNamed(name)));
+		//=> entities.Find(entity => entity.IsNamed(name));
 
 		public List<Type> FindAll<Type>() => entities.OfType<Type>().ToList();
 
@@ -44,18 +46,7 @@ namespace Solun.World
 
 		public Door FindDoorTo(Room room) => FindDoorTo(room.Name);
 
-		public Door FindDoorTo(string name) //=> FindAll<Door>().Find(door => door.EndRoom.IsNamed(name));
-		{
-			List<Door> validDoors = FindAll<Door>().FindAll(door => door.EndRoom.IsNamed(name));
-			switch(validDoors.Count)
-			{
-				case 0:
-					return null;
-				case 1:
-					return validDoors.First();
-				default:
-					throw new Exception("Multiple Objects Found");
-			}
-		}
+		public Door FindDoorTo(string name) 
+			=> Program.CheckMulti<Door>(FindAll<Door>().FindAll(door => door.EndRoom.IsNamed(name)));
 	}
 }

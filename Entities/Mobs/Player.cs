@@ -9,7 +9,7 @@ namespace Solun.Entities.Mobs
 	{
 		public Player(Room currentRoom)
 		{
-			name = "me";
+			allNames = new NameHolder("me");
 			description = "You look like... you.";
 
 			maxHealth = 100;

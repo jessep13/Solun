@@ -12,9 +12,9 @@ namespace Solun.Entities
 
 		public bool IsLocked => isLocked;
 
-		public Lock(string name, string description, Entity unlockEntity, bool isLocked)
+		public Lock(NameHolder names, string description, Entity unlockEntity, bool isLocked)
 		{
-			this.name = name;
+			allNames = names;
 			this.description = description;
 
 			this.unlockEntity = unlockEntity;

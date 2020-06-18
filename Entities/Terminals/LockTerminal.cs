@@ -11,8 +11,8 @@ namespace Solun.Entities.Terminals
 		
 		public LockTerminal(int id, int code, Lock lockEntity = null)
 		{
-			name = $"T#{id}";
-			description = $"A standard terminal with the numbers {id} etched on the side. The monitor awaits an input";
+			SetName(id);
+			description = $"A standard lock terminal with the numbers {id} etched on the side. The monitor awaits an input";
 
 			this.id = id;
 			if(id > 9999 || id < 0) throw new Exception("Int is invalid");
