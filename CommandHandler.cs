@@ -179,30 +179,7 @@ namespace Solun
 					}
 					
 				}
-				else
-				{
-					// Check inventory
-					if(player.Inventory.Count != 0)
-					{
-						Item item = player.Inventory.Find(item => item.IsNamed(name));
-						if(player.Inventory.Contains(item))
-						{
-							Console.WriteLine(item.Description);
-							return;
-						}
-					}
-
-					// Check in room
-					if(player.CurrentRoom.Entities.Count != 0)
-					{
-						Entity entity = player.CurrentRoom.FindEntity(name);
-						if(player.CurrentRoom.Entities.Contains(entity))
-						{
-							Console.WriteLine(entity.Description);
-							return;
-						}
-					}
-				}
+				else if(player.FindEntity(name) != null) Console.WriteLine(player.FindEntity(name).Description);
 			}
 		}
 
@@ -216,29 +193,24 @@ namespace Solun
 			}
 			else name = args[1];
 
-			// Check inventory
-			if(player.Inventory.Count != 0)
+			if(args.Length < 3)
 			{
-				Item item = player.Inventory.Find(item => item.IsNamed(name));
-				if(player.Inventory.Contains(item))
-				{
-					item.Interact(player);
-					return;
-				}
-			}
+				name = args[1];
 
-			// Check in room
-			if(player.CurrentRoom.Entities.Count != 0)
+				Entity entity = player.FindEntity(name);
+				if(entity != null) entity.Interact(player);
+				else Console.WriteLine($"Entity \"{name}\" not found. See all entities in room with look -l");
+			}
+			else
 			{
-				Entity entity = player.CurrentRoom.FindEntity(name);
-				if(player.CurrentRoom.Entities.Contains(entity))
-				{
-					entity.Interact(player);
-					return;
-				}
-			}
+				string target = args[2];
 
-			Console.WriteLine($"Entity \"{name}\" not found. See all entities in room with look -l");
+				// Find Entities
+				Entity targetEntity = player.FindEntity(target);
+				Entity useEntity = player.FindEntity(name);
+
+				if(targetEntity != null && useEntity != null) targetEntity.Interact(useEntity);
+			}
 		}
 
 		private void Move(string[] args)
