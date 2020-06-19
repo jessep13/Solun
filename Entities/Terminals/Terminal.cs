@@ -12,7 +12,7 @@ namespace Solun.Entities.Terminals
 	{
 		protected int id; // 4 digits
 
-		protected Item attachment;
+		protected Item attachment = null;
 
 		public Terminal() { }
 
@@ -31,12 +31,12 @@ namespace Solun.Entities.Terminals
 			description = $"A standard terminal with the numbers {id} etched on the side. The monitor awaits an input";
 		}
 
-		public virtual bool isAttachable(Item item) => false; 
+		public virtual bool IsAttachable(Item item) => false; 
 
 		public override void Interact(Entity entity)
 		{
 			if(entity is Mob) PreExecute();
-			else if(entity is Item && isAttachable((Item)entity)) attachment = (Item)entity;
+			else if(entity is Item && IsAttachable((Item)entity)) attachment = (Item)entity;
 		}
 
 		protected void PreExecute()
