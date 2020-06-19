@@ -16,12 +16,15 @@ namespace Solun.Entities.Terminals
 		{
 			SetName(id);
 			description = $"A standard terminal with the numbers {id} etched on the side. The monitor awaits an input";
-			
-			this.id = id;
-			if(id > 9999 || id < 0) throw new Exception("Int is invalid");
 		}
 
-		protected void SetName(int id) => allNames = new NameHolder($"T#{id}");
+		protected void SetName(int id)
+		{
+			this.id = id;
+			if(id > 9999 || id < 0) throw new Exception("Int is invalid");
+
+			allNames = new NameHolder($"T#{id}");
+		}
 
 		public override void Interact(Entity entity)
 		{

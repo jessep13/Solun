@@ -14,9 +14,6 @@ namespace Solun.Entities.Terminals
 			SetName(id);
 			description = $"A standard lock terminal with the numbers {id} etched on the side. The monitor awaits an input";
 
-			this.id = id;
-			if(id > 9999 || id < 0) throw new Exception("Int is invalid");
-
 			if(lockEntity != null) this.lockEntity = lockEntity;
 			this.code = code; // Must be 4 digits long
 			if(code > 9999 || code < 0) throw new Exception("Int is invalid");
