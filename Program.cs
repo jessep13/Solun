@@ -47,6 +47,7 @@ namespace Solun
 
 		static void CreateSector()
 		{
+			#region Cell
 			// Create Cell and Main Lab rooms
 			sector.AddRoom(
 				new NameHolder("Cell"),
@@ -86,6 +87,10 @@ namespace Solun
 				}),
 				"The note appears to be typed, with a signature on the bottem.",
 				"Hello. If you are reading this, it appears that you have learned to use your brain to pick up this note and to read it. I will explain later where you are, but for now you shouldn't be too concerned about that since you will be out of here in less than an hour. To open the door in front of you, there is a Lock Terminal awaiting for a code to open the door. You must enter \"1492\" into it in order to be granted access. The next challenge will lie in the next room. \nGood Luck. \n\t - F. E."));
+
+			#endregion
+
+			#region Sub Labs
 
 			// Add bio lab
 			sector.AddRoom(
@@ -139,6 +144,31 @@ namespace Solun
 				"The Exposure Incident",
 				"To all the staff at Sapphire Labs:\nAs you are all aware, three days ago Benny Konwell went on an absence without leave (or informally AWOL) as he managed to enter the code to the terminal and escaped our custody. While under normal circumstances we would not think too harshly of this incident, the fact that this laboratory and its staff agreed to work on Project Automaton in secrecy for a period of three years makes it my responsibility as Project Lead to enforce changes to the faucility to prevent this from occuring again and to locate Konwell before he has a chance to communicate with our opposition. We will now scramble the code every hour to prevent anyone from cracking the code. We will also launch an investigation to determine how Konwell accessed the code to the main doors. Anyone with information on this incident should mail me as soon as possible. I look forward to the finished results of this project.\n\t Deshi Tollup "
 				);
+
+			sector.FindRoom("Tech").AddEntity(new CodeCracker());
+
+			#endregion
+
+			// Creat Hallway
+			sector.AddRoom(
+				new NameHolder("Hallway"),
+				"A long hallway that seems to lead outside.");
+
+			// Create Lock Terminal in Main Lab
+			sector.FindRoom("Main").AddEntity(new LockTerminal(
+				1003,
+				8525));
+
+			// Link Main Lab and Hallway
+			sector.LinkRooms(
+				"Hallway",
+				"Main",
+				sector.FindRoom("Main").FindEntity("T#1003"),
+				true);
+
+			// Set lock for Lock Terminal
+			sector.FindRoom("Main").FindEntityType<LockTerminal>("T#1003").lockEntity
+				= sector.FindRoom("Main").FindDoorTo("Hallway").DoorLock;
 		}
 
 		static void SpawnPlayer(string roomName)

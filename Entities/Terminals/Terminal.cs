@@ -16,10 +16,7 @@ namespace Solun.Entities.Terminals
 
 		public Terminal() { }
 
-		public Terminal(int id)
-		{
-			SetName(id);
-		}
+		public Terminal(int id) => SetName(id);
 
 		protected void SetName(int id)
 		{

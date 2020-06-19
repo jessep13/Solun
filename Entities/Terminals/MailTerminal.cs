@@ -34,6 +34,8 @@ namespace Solun.Entities.Terminals
 
 		List<Mail> inbox = new List<Mail>();
 
+		public MailTerminal(int id) => SetName(id);
+
 		public void NewMessage(string author, string recipient, string subject, string message) 
 			=> inbox.Add(new Mail(author, recipient, subject, message));
 
