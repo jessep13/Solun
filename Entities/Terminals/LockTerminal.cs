@@ -12,7 +12,6 @@ namespace Solun.Entities.Terminals
 		public LockTerminal(int id, int code, Lock lockEntity = null)
 		{
 			SetName(id);
-			description = $"A standard lock terminal with the numbers {id} etched on the side. The monitor awaits an input";
 
 			if(lockEntity != null) this.lockEntity = lockEntity;
 			this.code = code; // Must be 4 digits long

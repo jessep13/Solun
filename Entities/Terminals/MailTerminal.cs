@@ -33,12 +33,6 @@ namespace Solun.Entities.Terminals
 		}
 
 		List<Mail> inbox = new List<Mail>();
-		
-		public MailTerminal(int id)
-		{
-			SetName(id);
-			description = $"A standard terminal with the numbers {id} etched on the side. The monitor awaits an input";
-		}
 
 		public void NewMessage(string author, string recipient, string subject, string message) 
 			=> inbox.Add(new Mail(author, recipient, subject, message));
