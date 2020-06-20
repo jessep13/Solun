@@ -60,7 +60,7 @@ namespace Solun.Entities.Terminals
 						CodeCracker cracker = (CodeCracker)attachment;
 						(int, int) hint = cracker.CheckGuess(guess, code);
 
-						if(hint.Item1 != -1 && hint.Item2 != -1) Console.WriteLine();
+						if(hint.Item1 == -1 && hint.Item2 == -1) Console.WriteLine();
 						else
 						{
 							Console.Write("[");

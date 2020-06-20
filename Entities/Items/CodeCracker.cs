@@ -51,18 +51,18 @@ namespace Solun.Entities.Items
 
 		public (int, int) CheckGuess(int guess, int code)
 		{
-			if(guesses >= maxGuesses) return (nuts: -1, bolts: -1);
+			if(guesses >= maxGuesses) return (-1, -1);
 
 			int[] splitGuess = Split(guess);
 			int[] splitCode = Split(code);
 
 #if DEBUG
-			Console.Write("GUESS: |", Color.HotPink);
+			Console.Write("\nGUESS: |", Color.HotPink);
 			foreach(int d in splitGuess) Console.Write(d, Color.HotPink);
-			Console.WriteLine("|");
+			Console.WriteLine("|", Color.HotPink);
 			Console.Write(" CODE: |", Color.HotPink);
 			foreach(int d in splitCode) Console.Write(d, Color.HotPink);
-			Console.WriteLine("|");
+			Console.WriteLine("|", Color.HotPink);
 #endif
 
 			int nuts = 0, bolts = 0;
@@ -97,12 +97,16 @@ namespace Solun.Entities.Items
 					if(splitCode[i] == d) numCode++;
 
 					// Subtract by the amount that are nuts for said digit in each count
-					if(splitGuess[i] == splitCode[i])
+					if(splitGuess[i] == splitCode[i] && splitGuess[i] == d)
 					{
 						numGuess--;
 						numCode--;
 					}
 				}
+
+#if DEBUG
+				//Console.WriteLine($"{d}: {Math.Min(numGuess, numCode)}", Color.HotPink);
+#endif
 
 				bolts += Math.Min(numGuess, numCode);
 			}
